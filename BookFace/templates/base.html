@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}BookFace{% endblock %}</title>
+</head>
+<body>
+
+<div>
+    <a href="/home/">
+    <input type="button" value="Home" />
+    </a>
+    {% if user.is_authenticated %}
+        <a href="/user/{{user.id}}">
+        <input type="button" value="{{user.username}}" />
+        </a>
+        <a href="/add_post">
+        <input type="button" value="Add post" />
+        </a>
+        <a href="/messages">
+        <input type="button" value="Messages" />
+        </a>
+        <a href="/edit">
+        <input type="button" value="Edit profile" />
+        </a>
+        <a href="/logout">
+        <input type="button" value="Logout" />
+        </a>
+
+
+
+    {% else %}
+        <a href="/register">
+        <input type="button" value="Register" />
+        </a>
+
+        <a href="/login">
+        <input type="button" value="Login" />
+        </a>
+    {% endif %}
+</div>
+
+{% block content %}
+
+{% endblock %}
+{% if user.is_authenticated %}
+Random users:<br>
+{% for user in random_users %}
+<a href="/user/{{user.id}}">{{user.first_name}} {{user.last_name}}</a><br>
+{% endfor %}
+{% endif %}
+</body>
+</html>

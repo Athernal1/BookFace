@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+{{postview.date_added}}
+<br>
+<h2>{{postview.title}}</h2>
+<br>
+{{postview.content}}
+<br>
+
+    <a href="/post/{{postview.pk}}/comment/">
+    <input type="button" value="Comment">
+    </a>
+
+{% for comment in comments %}
+<br>
+{{comment.author.first_name}} {{comment.author.last_name}} <br>
+{{comment.content}}<br>
+{% endfor %}
+{% endblock %}

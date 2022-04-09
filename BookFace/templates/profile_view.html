@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{user_data.first_name}} {{user_data.last_name}}<br>
+Birthday: {{user_data.profile.birthday}}<br>
+City: {{user_data.profile.city}}
+<a href="send_message/">
+    <button>
+        Send message
+    </button>
+</a>
+
+{% for post in posts %}
+<br>
+{{post.date_added}}
+<br>
+<h2><a href="/post/{{post.id}}">{{post.title}}</a></h2>
+<br>
+{{post.content}}
+<br><br><br><br><br>
+{% endfor %}
+
+{% endblock %}

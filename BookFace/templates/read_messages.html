@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for message in messages %}
+<br>{{message.created_at}}
+{{message.sender.first_name}} {{message.sender.last_name}} <br>
+{{message.msg_content}}<br>
+{% endfor %}
+{% endblock %}

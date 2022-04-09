@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+{{postview.date_added}}
+<br>
+<h2>{{postview.title}}</h2>
+<br>
+{{postview.content}}
+<br>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="content">
+    <input type="submit" value="Comment">
+</form>
+
+{% endblock %}
