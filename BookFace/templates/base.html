@@ -27,27 +27,45 @@
         <input type="button" value="Logout" />
         </a>
 
+    {% for post in blogposts %}
+        <br>
+        {{post.date_added}}
+        <br>
+        {{post.author.first_name}} {{post.author.last_name}}
+        <h2><a href="/post/{{post.id}}">{{post.title}}</a></h2>
+        <br>
+        {{post.content}}
+        <br><br><br><br><br>
+        {% endfor %}
 
+
+        {% if random_users %}
+            <br><br>Random users:<br>
+        {% for user in random_users %}
+            <a href="/user/{{user.id}}">{{user.first_name}} {{user.last_name}}</a><br>
+        {% endfor %}
+        {% endif %}
 
     {% else %}
+
         <a href="/register">
         <input type="button" value="Register" />
         </a>
 
         <a href="/login">
         <input type="button" value="Login" />
-        </a>
+        </a><br>
+            {% if message %}
+            {{ message }}
+        {% endif %}
+
+
     {% endif %}
 </div>
 
 {% block content %}
 
 {% endblock %}
-{% if user.is_authenticated %}
-Random users:<br>
-{% for user in random_users %}
-<a href="/user/{{user.id}}">{{user.first_name}} {{user.last_name}}</a><br>
-{% endfor %}
-{% endif %}
+
 </body>
 </html>

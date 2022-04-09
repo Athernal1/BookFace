@@ -3,7 +3,7 @@
 {% block content %}
 {% for message in messages %}
 <br>{{message.created_at}}
-{{message.sender.first_name}} {{message.sender.last_name}} <br>
+<a href="/user/{{message.sender.id}}">{{message.sender.first_name}} {{message.sender.last_name}} </a><br>
 {{message.msg_content}}<br>
 {% endfor %}
 {% endblock %}

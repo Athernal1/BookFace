@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, AddUserForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Profile, BlogPost, CommentBlog, Message
+from .models import BlogPost, CommentBlog, Message
 from random import shuffle
 
 
@@ -20,7 +20,8 @@ class Base(View):
     def get(self, request):
         random_users = list(User.objects.all())
         shuffle(random_users)
-        return render(request, self.template_name, {"random_users": random_users[0:3]})
+        blogposts = BlogPost.objects.all().order_by("-date_added")
+        return render(request, self.template_name, {"random_users": random_users[0:3], "blogposts": blogposts})
 
 
 class AddUserView(View):
@@ -34,8 +35,8 @@ class AddUserView(View):
         if form.is_valid():
             form.save()
             # Profile.objects.create(user=instance)
-            message = "Registration completed"
-            return redirect("/")
+            message = "Registration completed. You can log in."
+            return render(request, 'base.html', {"message": message})
         else:
             message = "Something went wrong, please try again"
             return render(request, self.template_name, {"form": form, "message": message})

@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birthday = models.DateField(null=True, default=None)
-    city = models.CharField(max_length=32, null=True, default=None)
+    birthday = models.DateField(null=True, default=None, blank=True)
+    city = models.CharField(max_length=32, null=True, default=None, blank=True)
 
 
 class BlogPost(models.Model):
